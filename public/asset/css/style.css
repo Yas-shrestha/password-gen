@@ -2,3 +2,27 @@
     height: 100vh;
     background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
 }
+
+.primary-button {
+    display: inline-block;
+    background-color: #007bff;
+    /* Primary blue */
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background 0.3s ease;
+    margin-top: 10px;
+}
+
+.primary-button:hover {
+    background-color: #0056b3;
+    /* Darker blue on hover */
+}
+footer {
+    margin-top: 1rem;
+    text-align: center;
+}

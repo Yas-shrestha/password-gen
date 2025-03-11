@@ -34,7 +34,7 @@
                     <p class="ms-4">
                         A safe place to store Your keys
                     </p>
-                    <a href="{{ route('pass.gen') }}" class="primary-button">Save Pass</a>
+                    <a href="{{ route('pass-manage.index') }}" class="primary-button">Add Your Passwords</a>
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\UserPass;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 
 class UserPassController extends Controller
 {
@@ -12,7 +14,8 @@ class UserPassController extends Controller
      */
     public function index()
     {
-        return view('saved');
+        $userPasses = UserPass::query()->paginate(10)->where('user_id', Auth::id());
+        return view('saved', compact('userPasses'));
     }
 
     /**
@@ -28,13 +31,27 @@ class UserPassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // dd($request->all());
+        $request->validate([
+            'website' => 'required|min:25',
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        $pass = new UserPass();
+        $pass->app_name = $request->website;
+        $pass->username = $request->username;
+        // AES-256 encryption through crypt
+        $pass->password = Crypt::encryptString($request->password);
+        $pass->user_id = Auth::id();
+        // dd($pass);
+        $pass->save();
+        return redirect()->route('pass-manage.index')->with('success', 'Password saved successfully');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(UserPass $userPass)
+    public function show($id)
     {
         //
     }
@@ -42,7 +59,7 @@ class UserPassController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(UserPass $userPass)
+    public function edit($id)
     {
         //
     }
@@ -50,16 +67,43 @@ class UserPassController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, UserPass $userPass)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'website' => 'required|min:25',
+            'username' => 'required',
+            'password' => 'required',
+        ]);
+        $pass = new UserPass();
+        $pass = $pass->where('id', $id)->first();
+        $pass->app_name = $request->website;
+        $pass->username = $request->username;
+        // AES-256 encryption through crypt
+        $pass->password = Crypt::encryptString($request->password);
+        $pass->user_id = Auth::id();
+        // dd($pass);
+        $pass->save();
+        return redirect()->route('pass-manage.index')->with('success', 'Password saved successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(UserPass $userPass)
+    public function destroy($id)
     {
         //
+    }
+    public function getPassword($id)
+    {
+        $userPass = UserPass::findOrFail($id);
+
+        // Only allow the owner to see their passwords
+        if ($userPass->user_id !== auth()->id()) {
+            abort(403);
+        }
+
+        return view('passwords.show', [
+            'password' => Crypt::decryptString($userPass->passwords)
+        ]);
     }
 }

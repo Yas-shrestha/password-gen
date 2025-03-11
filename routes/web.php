@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\PasswordManageController;
 use App\Http\Controllers\ProfileController;
-use App\Models\UserPass;
+use App\Http\Controllers\UserPassController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -14,7 +14,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('pass-manage', UserPass::class);
+    Route::resource('pass-manage', UserPassController::class);
     Route::get('/pass-gen', [PasswordManageController::class, 'index'])->name('pass.gen');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
