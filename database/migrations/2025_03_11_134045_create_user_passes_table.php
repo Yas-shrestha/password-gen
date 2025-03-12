@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Foreign key to users table
             $table->string('app_name'); // The application name (e.g., Facebook, Twitter)
-            $table->text('password'); // Store encrypted passwords (see below)
+            $table->text('password'); // Store encrypted passwords 
             $table->string('username')->nullable(); // Optional: Store the username/email for the account
             $table->text('notes')->nullable(); // Optional: Allow users to add extra info
             $table->timestamps();

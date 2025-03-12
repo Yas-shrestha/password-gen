@@ -14,8 +14,11 @@ class UserPassController extends Controller
      */
     public function index()
     {
-        $userPasses = UserPass::query()->paginate(10)->where('user_id', Auth::id());
-        return view('saved', compact('userPasses'));
+        $passwords = UserPass::query()->where('user_id', Auth::id())->paginate(10);
+        // $password = $passwords->password;
+        // dd(Crypt::decryptString(trim($password)));
+
+        return view('saved', compact('passwords'));
     }
 
     /**
@@ -91,14 +94,16 @@ class UserPassController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $password = UserPass::where('user_id', Auth::id())->findOrFail($id);
+        $password->delete();
+        return redirect()->back()->with('success', 'Password deleted successfully.');
     }
     public function getPassword($id)
     {
         $userPass = UserPass::findOrFail($id);
 
         // Only allow the owner to see their passwords
-        if ($userPass->user_id !== auth()->id()) {
+        if ($userPass->user_id !== Auth::id()) {
             abort(403);
         }
 

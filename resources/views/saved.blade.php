@@ -51,51 +51,78 @@
         </div>
 
         <!-- Table for Displaying Passwords -->
-        <div class="bg-white rounded-lg shadow-md overflow-hidden">
-            <h2 class="text-2xl font-semibold p-6 bg-gray-50">Passwords</h2>
-            <table class="min-w-full divide-y divide-gray-200">
+        <div class="w-full overflow-x-auto">
+            <h2 class="text-2xl font-semibold shadow p-6 bg-white">Passwords</h2>
+
+            <table class="w-full table-auto border-collapse border border-white">
                 <!-- Table Header -->
-                <thead class="bg-gray-50">
+                <thead class="bg-white border-gr text-gray-700">
                     <tr>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Website
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Username
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Password
-                        </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                            Actions
-                        </th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold">Website</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold">Username</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold">Password</th>
+                        <th class="px-6 py-3 text-left text-sm font-semibold">Actions</th>
                     </tr>
                 </thead>
+
                 <!-- Table Body -->
-                <tbody class="bg-white divide-y divide-gray-200">
-                    <!-- Example Row 1 -->
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            example.com
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            user1
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            ********
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            <a href="#" class="text-blue-600 hover:text-blue-900">Edit</a>
-                            <span class="mx-2 text-gray-300">|</span>
-                            <a href="#" class="text-red-600 hover:text-red-900">Delete</a>
-                        </td>
-                    </tr>
+                <tbody>
+
+                    @foreach ($passwords as $password)
+                        <tr class="border-b bg-white hover:bg-gray-50 transition">
+                            <td class="px-6 py-4">{{ $password->app_name }}</td>
+                            <td class="px-6 py-4">{{ $password->username ?? 'N/A' }}</td>
+                            <td class="px-6 py-4">
+                                <span class="hidden-password">********</span>
+                                <span
+                                    class="visible-password hidden">{{ Crypt::decryptString($password->password) }}</span>
+                                <button class="text-blue-500 ml-2 toggle-password">👁</button>
+                                <button class="text-green-500 ml-2 copy-password"
+                                    data-password="{{ Crypt::decryptString($password->password) }}">📋</button>
+                            </td>
+                            <td class="px-6 py-4">
+                                <a href="{{ route('pass-manage.edit', $password->id) }}"
+                                    class="text-blue-600 hover:text-blue-900">Edit</a>
+                                <span class="mx-2 text-gray-400">|</span>
+                                <form action="{{ route('pass-manage.destroy', $password->id) }}" method="POST"
+                                    class="inline">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="text-red-600 hover:text-red-900"
+                                        onclick="return confirm('Are you sure?')">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
+
         </div>
     </div>
+    <script>
+        document.querySelectorAll('.toggle-password').forEach(button => {
+            button.addEventListener('click', function() {
+                let row = this.closest('td');
+                let hiddenPass = row.querySelector('.hidden-password');
+                let visiblePass = row.querySelector('.visible-password');
+
+                if (hiddenPass.style.display === "none") {
+                    hiddenPass.style.display = "inline";
+                    visiblePass.style.display = "none";
+                } else {
+                    hiddenPass.style.display = "none";
+                    visiblePass.style.display = "inline";
+                }
+            });
+        });
+
+        document.querySelectorAll('.copy-password').forEach(button => {
+            button.addEventListener('click', function() {
+                let password = this.getAttribute('data-password');
+                navigator.clipboard.writeText(password);
+                alert("Password copied!");
+            });
+        });
+    </script>
+
 </x-app-layout>
