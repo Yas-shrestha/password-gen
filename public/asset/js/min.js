@@ -1,5 +1,3 @@
-
-
 function genPass() {
     const length = document.getElementById("lengthSlider").value;
     const includeUppercase =
@@ -16,6 +14,7 @@ function genPass() {
     for (let i = 0; i < length; i++) {
         password += chars.charAt(Math.floor(Math.random() * chars.length));
     }
+    document.getElementById("genpassword").value = password;
     document.getElementById("password").value = password;
 }
 

@@ -32,9 +32,19 @@
                         Store Your <span style="color: blue">Passwords</span>
                     </h2>
                     <p class="ms-4">
-                        A safe place to store Your keys
+                        A safe place to store Your keys. Password Generator is also available here and you can also view
+                        your passwords
                     </p>
                     <a href="{{ route('pass-manage.index') }}" class="primary-button">Add Your Passwords</a>
+                </div>
+                <div class="Add-pass   p-4">
+                    <h2 class="font-semibold" style="font-size: 24px">
+                        See Your and Shared <span style="color: blue">Passwords</span>
+                    </h2>
+                    <p class="ms-4">
+                        All of Your Passwords are safely Displayed here
+                    </p>
+                    <a href="{{ route('pass.show') }}" class="primary-button">See Passwords</a>
                 </div>
             </div>
         </div>

@@ -11,4 +11,8 @@ class UserPass extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+    public function sharedWith()
+    {
+        return $this->hasMany(SharedPass::class, 'user_pass_id');
+    }
 }

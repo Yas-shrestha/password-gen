@@ -23,6 +23,7 @@ class User extends Authenticatable  implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'google2fa_secret'
     ];
 
     /**
@@ -33,6 +34,7 @@ class User extends Authenticatable  implements MustVerifyEmail
     protected $hidden = [
         'password',
         'remember_token',
+        'google2fa_secret',
     ];
 
     /**
@@ -50,5 +52,14 @@ class User extends Authenticatable  implements MustVerifyEmail
     public function userPasses()
     {
         return $this->hasMany(UserPass::class);
+    }
+    public function sharedPasses()
+    {
+        return $this->hasMany(SharedPass::class, 'shared_by_user_id');
+    }
+
+    public function receivedPasses()
+    {
+        return $this->hasMany(SharedPass::class, 'shared_with_user_id');
     }
 }

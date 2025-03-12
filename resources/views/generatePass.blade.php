@@ -22,7 +22,7 @@
 
                     <!-- Password Display -->
                     <div class="flex items-center border border-gray-300 rounded-lg p-2">
-                        <input id="password" type="text" readonly
+                        <input id="genpassword" type="text" readonly
                             class="w-full outline-none text-lg px-2 bg-transparent" placeholder="Generated password" />
                         <button onclick="copyPass()" class="ml-2 text-blue-500 hover:text-blue-700">
                             📋

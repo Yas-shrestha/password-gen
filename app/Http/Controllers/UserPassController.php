@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserPass;
+use App\Models\SharedPass;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
@@ -14,11 +16,10 @@ class UserPassController extends Controller
      */
     public function index()
     {
-        $passwords = UserPass::query()->where('user_id', Auth::id())->paginate(10);
-        // $password = $passwords->password;
-        // dd(Crypt::decryptString(trim($password)));
+        $passwords = Auth::user()->userPasses;
+        $receivedPasses = Auth::user()->receivedPasses->map->userPass;
 
-        return view('saved', compact('passwords'));
+        return view('saved', compact('passwords', 'receivedPasses'));
     }
 
     /**
@@ -98,6 +99,8 @@ class UserPassController extends Controller
         $password->delete();
         return redirect()->back()->with('success', 'Password deleted successfully.');
     }
+
+    // Get password
     public function getPassword($id)
     {
         $userPass = UserPass::findOrFail($id);
@@ -110,5 +113,63 @@ class UserPassController extends Controller
         return view('passwords.show', [
             'password' => Crypt::decryptString($userPass->passwords)
         ]);
+    }
+
+    // Open share Page so owner can share password
+
+    public function share($id)
+    {
+        $password = UserPass::findOrFail($id);
+
+        if ($password->user_id !== auth()->id()) {
+            abort(403, 'You can only share your own passwords.');
+        }
+
+        $users = User::where('id', '!=', auth()->id())->pluck('email', 'id');
+        $sharedWith = $password->sharedWith()->with('sharedWith')->get(); // Keep as SharedPass collection
+        return view('share', compact('password', 'users', 'sharedWith'));
+    }
+
+    // store shared user
+
+    public function storeShare(Request $request, $id)
+    {
+        $password = UserPass::findOrFail($id);
+
+        // Ensure only the owner can share
+        if ($password->user_id !== Auth::id()) {
+            abort(403, 'You can only share your own passwords.');
+        }
+
+        $request->validate([
+            'shared_with_user_id' => 'required|exists:users,id|not_in:' . Auth::id(),
+        ]);
+
+        SharedPass::create([
+            'user_pass_id' => $password->id,
+            'shared_with_user_id' => $request->shared_with_user_id,
+            'shared_by_user_id' => Auth::id(),
+        ]);
+
+        return redirect()->route('pass-manage.index')->with('success', 'Password shared successfully.');
+    }
+
+
+    // remove shared user
+    public function removeShare($id, $sharedPassId)
+    {
+        $password = UserPass::findOrFail($id);
+
+        if ($password->user_id !== Auth::id()) {
+            abort(403, 'You can only manage your own passwords.');
+        }
+
+        $sharedPass = SharedPass::where('user_pass_id', $password->id)
+            ->where('id', $sharedPassId)
+            ->firstOrFail();
+
+        $sharedPass->delete();
+
+        return redirect()->back()->with('success', 'Access removed successfully.');
     }
 }
