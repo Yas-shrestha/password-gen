@@ -4,6 +4,11 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserPassController;
 use App\Http\Controllers\PasswordManageController;
+
+Route::get('/', function () {
+    return view('index');
+})->name('index');
+
 // Routes requiring auth, email verification, and 2FA
 Route::middleware(['auth', 'verified'])->group(function () {
     // for managing passwords
@@ -24,12 +29,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // dashboard routes
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-    Route::get('/', function () {
-        return view('dashboard');
-    });
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard');
+    // })->name('dashboard');
+    // Route::get('/', function () {
+    //     return view('dashboard');
+    // });
 });
 
 
