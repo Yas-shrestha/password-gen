@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserPassController;
@@ -10,7 +11,7 @@ Route::get('/', function () {
 })->name('index');
 
 // Routes requiring auth, email verification, and 2FA
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     // for managing passwords
 
     Route::resource('/pass-manage', UserPassController::class);
@@ -33,8 +34,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     //     return view('dashboard');
     // })->name('dashboard');
     // Route::get('/', function () {
-    //     return view('dashboard');
-    // });
+    //     return view('admin.index');
+    // })->name('dashboard');
+    Route::get('/', [FrontendController::class, 'dashboard'])->name('dashboard');
 });
 
 

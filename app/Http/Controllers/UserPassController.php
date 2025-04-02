@@ -19,7 +19,7 @@ class UserPassController extends Controller
         $passwords = Auth::user()->userPasses;
         $receivedPasses = Auth::user()->receivedPasses->map->userPass;
 
-        return view('saved', compact('passwords', 'receivedPasses'));
+        return view('admin.add-pass', compact('passwords', 'receivedPasses'));
     }
 
     /**
@@ -65,7 +65,9 @@ class UserPassController extends Controller
      */
     public function edit($id)
     {
-        //
+        $pass = new UserPass;
+        $pass = $pass->where('id', $id)->first();
+        return view('admin.edit-pass', compact('pass'));
     }
 
     /**
@@ -76,14 +78,16 @@ class UserPassController extends Controller
         $request->validate([
             'website' => 'required|min:25',
             'username' => 'required',
-            'password' => 'required',
+            'password' => 'nullable',
         ]);
-        $pass = new UserPass();
+        $pass = new UserPass;
         $pass = $pass->where('id', $id)->first();
         $pass->app_name = $request->website;
         $pass->username = $request->username;
         // AES-256 encryption through crypt
-        $pass->password = Crypt::encryptString($request->password);
+        if ($request->password) {
+            $pass->password = Crypt::encryptString($request->password);
+        }
         $pass->user_id = Auth::id();
         // dd($pass);
         $pass->save();
@@ -110,7 +114,7 @@ class UserPassController extends Controller
             abort(403);
         }
 
-        return view('passwords.show', [
+        return view('admin.show-pass', [
             'password' => Crypt::decryptString($userPass->passwords)
         ]);
     }
@@ -121,13 +125,13 @@ class UserPassController extends Controller
     {
         $password = UserPass::findOrFail($id);
 
-        if ($password->user_id !== auth()->id()) {
+        if ($password->user_id !== Auth::user()->id) {
             abort(403, 'You can only share your own passwords.');
         }
 
-        $users = User::where('id', '!=', auth()->id())->pluck('email', 'id');
+        $users = User::where('id', '!=', Auth::user()->id)->pluck('email', 'id');
         $sharedWith = $password->sharedWith()->with('sharedWith')->get(); // Keep as SharedPass collection
-        return view('share', compact('password', 'users', 'sharedWith'));
+        return view('admin.share', compact('password', 'users', 'sharedWith'));
     }
 
     // store shared user

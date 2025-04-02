@@ -13,11 +13,11 @@ class PasswordManageController extends Controller
         $passwords = Auth::user()->userPasses;
         $receivedPasses = Auth::user()->receivedPasses->map->userPass;
 
-        return view('show-pass', compact('passwords', 'receivedPasses'));
+        return view('admin.show-pass', compact('passwords', 'receivedPasses'));
     }
 
     public function index()
     {
-        return view('generatePass');
+        return view('admin.generatePass');
     }
 }
