@@ -37,7 +37,7 @@ class UserPassController extends Controller
     {
         // dd($request->all());
         $request->validate([
-            'website' => 'required|min:25',
+            'website' => 'required',
             'username' => 'required',
             'password' => 'required',
         ]);

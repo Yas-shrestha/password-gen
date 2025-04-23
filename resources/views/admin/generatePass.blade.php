@@ -42,6 +42,7 @@
                                 class="form-range">
                         </div>
 
+
                         <!-- Generate Button -->
                         <div class="text-center mt-3">
                             <button class="btn btn-primary" onclick="genPass()">Generate Password</button>

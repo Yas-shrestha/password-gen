@@ -126,5 +126,9 @@
                 alert("Password copied!");
             });
         });
+
+        document.getElementById("lengthSlider").addEventListener("input", function() {
+            document.getElementById("lengthValue").innerText = this.value;
+        });
     </script>
 @endsection
