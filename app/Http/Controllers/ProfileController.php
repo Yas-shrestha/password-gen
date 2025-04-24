@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 
 class ProfileController extends Controller
 {
@@ -26,16 +28,39 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        $user = $request->user();
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // Fill basic validated fields
+        $user->fill($request->validated());
+
+        // Reset email verification if email changed
+        if ($user->isDirty('email')) {
+            $user->email_verified_at = null;
         }
 
-        $request->user()->save();
+        // Handle image upload
+        if ($request->hasFile('img')) {
+            // Delete old image if exists
+            if ($user->img && File::exists(public_path('uploads/' . $user->img))) {
+                File::delete(public_path('uploads/' . $user->img));
+            }
+
+            // Generate unique filename
+            $fileName = Str::slug($user->name) . '-' . time() . '.' . $request->img->extension();
+
+            // Move uploaded file to public/uploads
+            $request->img->move(public_path('uploads'), $fileName);
+
+            // Save only filename to DB
+            $user->img = $fileName;
+        }
+
+        $user->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
+
 
     /**
      * Delete the user's account.

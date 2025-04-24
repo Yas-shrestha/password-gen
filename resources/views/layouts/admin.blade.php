@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
-            <a class="navbar-brand" href="#">Shield Pass</a>
+            <a class="navbar-brand" href="{{ route('index') }}">Shield Pass</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -53,7 +53,7 @@
                 </ul>
                 <div class="d-flex">
                     @if (Auth::user())
-                        <a href="btn btn-link" class="btn btn-link text-decoration-none">Setting</a>
+                        <a href="{{ route('profile.edit') }}" class="btn btn-link text-decoration-none">Setting</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
@@ -73,104 +73,61 @@
     <main>
         @yield('container')
     </main>
-    <footer class=" mt-0 text-center text-lg-start" style="background-color:#111827">
+    <footer class="mt-0 text-center text-lg-start" style="background-color:#111827">
         <div class="container p-4">
             <div class="row">
-                <!--Grid column-->
+                <!-- Product -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white">Product</h5>
-
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Features</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Pricing</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Vault Access</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Mobile App</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Company -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Company</h5>
-
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Press</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Resource -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white">Resource</h5>
-
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Security Guide</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">API Docs</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Blog</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Legal -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Legal</h5>
-
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Cookies Policy</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">User Agreement</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
-        <!-- Copyright -->
         <div class="text-center p-3 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2020 Copyright:
-            <a class="text-secondary  text-decoration-none " href="">Shield Pass</a>
+            <a class="text-secondary text-decoration-none" href="#">Shield Pass</a>
         </div>
-        <!-- Copyright -->
     </footer>
+
     <script src="{{ asset('asset/js/min.js') }}"></script>
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
 </body>

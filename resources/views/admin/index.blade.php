@@ -39,6 +39,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 col-sm-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Reused Passwords</h5>
+                                <h6 class="card-subtitle mb-2 text-muted ">{{ $totalReusedPasswords }}</h6>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

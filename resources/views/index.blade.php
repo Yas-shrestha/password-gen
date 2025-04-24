@@ -15,7 +15,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">
         <div class="container">
-            <a class="navbar-brand" href="#">Shield Pass</a>
+            <a class="navbar-brand" href="/">Shield Pass</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -102,62 +102,64 @@
             <div class="container p-5">
                 <div class="my-4 text-center">
                     <h2>Why Choose Vault Service</h2>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure, minus.</p>
+                    <p>Vault Service ensures your digital data is secure, accessible, and private with top-tier
+                        protection.</p>
                 </div>
                 <div class="row mt-5">
-                    <div class="col-md-4  mb-3 col-sm-12">
-                        <div class="card ">
+                    <div class="col-md-4 mb-3 col-sm-12">
+                        <div class="card">
                             <div class="pt-3 px-4">
                                 <a href=""
-                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3"><i
-                                        class="fa-solid fa-moon"></i></a>
-
+                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3">
+                                    <i class="fa-solid fa-lock"></i>
+                                </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <h5 class="card-title">End-to-End Encryption</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Maximum Data Security</h6>
+                                <p class="card-text">All your files are encrypted from the moment you upload them until
+                                    they're accessed, ensuring privacy and confidentiality.</p>
                                 b5
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4  mb-3 col-sm-12">
-                        <div class="card ">
+                    <div class="col-md-4 mb-3 col-sm-12">
+                        <div class="card">
                             <div class="pt-3 px-4">
                                 <a href=""
-                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3"><i
-                                        class="fa-solid fa-moon"></i></a>
-
+                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3">
+                                    <i class="fa-solid fa-clock"></i>
+                                </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <h5 class="card-title">24/7 Access</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Your Data Anytime</h6>
+                                <p class="card-text">Access your files anytime from anywhere. Our cloud-based service
+                                    never sleeps, just like your data shouldn't.</p>
                                 b5
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4  mb-3 col-sm-12">
-                        <div class="card ">
+                    <div class="col-md-4 mb-3 col-sm-12">
+                        <div class="card">
                             <div class="pt-3 px-4">
                                 <a href=""
-                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3"><i
-                                        class="fa-solid fa-moon"></i></a>
-
+                                    class="inline-block bg-primary-subtle px-3 py-2 text-primary rounded-3">
+                                    <i class="fa-solid fa-plug"></i>
+                                </a>
                             </div>
                             <div class="card-body">
-                                <h5 class="card-title">Card title</h5>
-                                <h6 class="card-subtitle mb-2 text-muted ">Card subtitle</h6>
-                                <p class="card-text">Some quick example text to build on the card title and make up the
-                                    bulk of the card's content.</p>
+                                <h5 class="card-title">Easy Integration</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Works With Your Tools</h6>
+                                <p class="card-text">Seamlessly integrate Vault Service with your existing workflow
+                                    tools like Google Drive, Dropbox, or OneDrive.</p>
                                 b5
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </section>
         <section>
             <div class="p-5" style="background-color:#233254">
@@ -169,104 +171,61 @@
             </div>
         </section>
     </main>
-    <footer class=" mt-0 text-center text-lg-start" style="background-color:#111827">
+    <footer class="mt-0 text-center text-lg-start" style="background-color:#111827">
         <div class="container p-4">
             <div class="row">
-                <!--Grid column-->
+                <!-- Product -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white">Product</h5>
-
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Features</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Pricing</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Vault Access</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Mobile App</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Company -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Company</h5>
-
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">About Us</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Careers</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Press</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Contact</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Resource -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white">Resource</h5>
-
                     <ul class="list-unstyled mb-0">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Help Center</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Security Guide</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">API Docs</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Blog</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
 
-                <!--Grid column-->
+                <!-- Legal -->
                 <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Legal</h5>
-
                     <ul class="list-unstyled">
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 1</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 2</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 3</a>
-                        </li>
-                        <li>
-                            <a href="#!" class="text-secondary  text-decoration-none ">Link 4</a>
-                        </li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Terms of Service</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">Cookies Policy</a></li>
+                        <li><a href="#" class="text-secondary text-decoration-none">User Agreement</a></li>
                     </ul>
                 </div>
-                <!--Grid column-->
             </div>
-            <!--Grid row-->
         </div>
-        <!-- Grid container -->
 
-        <!-- Copyright -->
         <div class="text-center p-3 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
             © 2020 Copyright:
-            <a class="text-secondary  text-decoration-none " href="">Shield Pass</a>
+            <a class="text-secondary text-decoration-none" href="#">Shield Pass</a>
         </div>
-        <!-- Copyright -->
     </footer>
+
     <script src="{{ asset('bootstrap/js/bootstrap.js') }}"></script>
 </body>
 
