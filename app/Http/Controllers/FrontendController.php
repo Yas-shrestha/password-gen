@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactMessageMail;
+use Illuminate\Support\Facades\Mail;
+use App\Models\Activity;
+use App\Models\Contact;
 use App\Models\SharedPass;
 use App\Models\UserPass;
 use Illuminate\Http\Request;
@@ -40,12 +44,34 @@ class FrontendController extends Controller
         // Only count passwords used more than once
         $reusedPasswords = array_filter($passwordMap, fn($count) => $count > 1);
         $totalReusedPasswords = count($reusedPasswords);
-
+        $activities = Activity::with('user')->latest()->take(20)->get();
         return view('admin.index', compact(
             'totalPassword',
             'totalSharedPassword',
             'recentPasswords',
-            'totalReusedPasswords'
+            'totalReusedPasswords',
+            'activities'
         ));
+    }
+    public function contact()
+    {
+        $contacts = Contact::query()->latest()->paginate(10);
+        return view('support', compact('contacts'));
+    }
+    public function contactStore(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+            'phone' => 'nullable|string',
+            'message' => 'required|string|max:500',
+        ]);
+
+        // Store the contact message in the database
+        Contact::create($request->all());
+
+
+
+        return redirect()->back()->with('success', 'Message sent successfully!');
     }
 }

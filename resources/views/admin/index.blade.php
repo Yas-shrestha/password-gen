@@ -114,6 +114,40 @@
                 @endif
             </div>
         </section>
+        <section class="my-5">
+            <div class="container">
+                <h1 class="mb-4 text-center">Recent Activities</h1>
+
+                <ul class="list-group">
+                    @foreach ($activities as $activity)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <!-- Activity User and Action -->
+                            <div>
+                                <strong>{{ $activity->user->name }}</strong>
+                                <span class="badge bg-info text-dark p-2">{{ ucfirst($activity->action) }}</span>
+                                <small class="text-muted">({{ $activity->created_at->diffForHumans() }})</small>
+                            </div>
+
+                            <!-- Description and Action Color -->
+                            <div>
+                                <!-- Color-coding based on action -->
+                                @if ($activity->action == 'password_shared')
+                                    <span class="badge bg-success text-white">Shared</span>
+                                @elseif($activity->action == 'share_removed')
+                                    <span class="badge bg-danger text-white">Removed</span>
+                                @else
+                                    <span class="badge bg-primary text-white">Saved</span>
+                                @endif
+                            </div>
+
+                            <!-- Description under the action -->
+                            <small class="text-muted mt-2 d-block">{{ $activity->description }}</small>
+                        </li>
+                    @endforeach
+                </ul>
+            </div>
+        </section>
+
     </main>
     <script>
         function togglePassword(button) {

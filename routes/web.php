@@ -9,6 +9,10 @@ use App\Http\Controllers\PasswordManageController;
 Route::get('/', function () {
     return view('index');
 })->name('index');
+Route::get('/security', function () {
+    return view('security');
+})->name('security');
+Route::get('/support', [FrontendController::class, 'contact'])->name('support');
 
 // Routes requiring auth, email verification, and 2FA
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
@@ -37,6 +41,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     //     return view('admin.index');
     // })->name('dashboard');
     Route::get('/', [FrontendController::class, 'dashboard'])->name('dashboard');
+    Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
 });
 
 

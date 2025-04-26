@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\UserPass;
 use App\Models\SharedPass;
 use App\Models\User;
@@ -49,6 +50,12 @@ class UserPassController extends Controller
         $pass->user_id = Auth::id();
         // dd($pass);
         $pass->save();
+
+        Activity::create([
+            'user_id' => Auth::id(),
+            'action' => 'password_saved',
+            'description' => 'Saved a password for ' . $request->website,
+        ]);
         return redirect()->route('pass-manage.index')->with('success', 'Password saved successfully');
     }
 
@@ -91,6 +98,12 @@ class UserPassController extends Controller
         $pass->user_id = Auth::id();
         // dd($pass);
         $pass->save();
+        Activity::create([
+            'user_id' => Auth::id(),
+            'action' => 'password_updated for ' . $request->website,
+            'description' => 'Saved a password for ' . $request->website,
+        ]);
+
         return redirect()->route('pass-manage.index')->with('success', 'Password saved successfully');
     }
 
@@ -131,6 +144,7 @@ class UserPassController extends Controller
 
         $users = User::where('id', '!=', Auth::user()->id)->pluck('email', 'id');
         $sharedWith = $password->sharedWith()->with('sharedWith')->get(); // Keep as SharedPass collection
+
         return view('admin.share', compact('password', 'users', 'sharedWith'));
     }
 
@@ -154,7 +168,13 @@ class UserPassController extends Controller
             'shared_with_user_id' => $request->shared_with_user_id,
             'shared_by_user_id' => Auth::id(),
         ]);
+        $sharedWithUser = User::find($request->shared_with_user_id);
 
+        Activity::create([
+            'user_id' => Auth::id(),
+            'action' => 'password_shared',
+            'description' => 'Shared password for ' . $password->app_name . ' with ' . $sharedWithUser->name,
+        ]);
         return redirect()->route('pass-manage.index')->with('success', 'Password shared successfully.');
     }
 
@@ -171,7 +191,12 @@ class UserPassController extends Controller
         $sharedPass = SharedPass::where('user_pass_id', $password->id)
             ->where('id', $sharedPassId)
             ->firstOrFail();
-
+        $sharedWithUser = User::find($sharedPass->shared_with_user_id);
+        Activity::create([
+            'user_id' => Auth::id(),
+            'action' => 'share_removed',
+            'description' => 'Removed shared access of ' . $sharedWithUser->name . ' for ' . $password->app_name,
+        ]);
         $sharedPass->delete();
 
         return redirect()->back()->with('success', 'Access removed successfully.');

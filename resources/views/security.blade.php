@@ -1,31 +1,49 @@
 @extends('layouts.frontend')
 
 @section('container')
-    <main style="background-color:#BBC6DF">
-        <section class="main-section py-3">
-            <div class="container">
-                <div class="row p-5">
-                    <div class="col-md-6  mb-3 col-sm-12">
-                        <div class="text-center text-md-start py-5">
-                            <h1 class="my-3" style="font-size:3.5rem">Keep Your Password Safe and Secure</h1>
-                            <p class="mt-5 mb-3">Your Digital Life Secured with military-grade encryption.Access Your
-                                Password anywhere
-                                Anytime</p>
-                        </div>
-                        <div class="d-flex justify-content-center justify-content-md-start">
-                            <a href="{{ route('register') }}" class="btn btn-primary me-3">Get Started</a>
-                            <a href="#" class="btn text-light"><i class="fa-solid fa-play"></i> Watch Video</a>
-                        </div>
-                    </div>
-                    <div class="col-md-6  col-sm-12">
-                        <div class="rounded-3">
-                            <img src="{{ asset('asset/images/main-img.png') }}" alt="password manager" class="rounded-3"
-                                style="width: 100%; height: 100%;background-color:#BBC6DF">
-                        </div>
-                    </div>
-                </div>
+    <div class="container my-5">
+        <h1 class="text-center mb-4">Account Security</h1>
+
+
+
+        <!-- Enable Two-Factor Authentication (2FA) -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Enable Two-Factor Authentication (2FA)</h5>
             </div>
-        </section>
+            <div class="card-body">
+                <p>Two-Factor Authentication adds an additional layer of security to your account. Once enabled, you’ll need
+                    both your password and a verification code sent to your phone.</p>
+                <a href="{{ route('login') }}" class="btn btn-primary">Log in to Enable 2FA</a>
+            </div>
+        </div>
+
+        <!-- Monitor Account Activity Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Monitor Your Account Activity</h5>
+            </div>
+            <div class="card-body">
+                <p>Regularly check your account activity to ensure that there is no suspicious behavior. If you notice
+                    anything unusual, immediately change your password and contact support.</p>
+                {{-- <a href="{{ route('activity.index') }}" class="btn btn-info">View Recent Activity</a> --}}
+            </div>
+        </div>
+
+        <!-- Secure Your Devices Section -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h5 class="card-title">Secure Your Devices</h5>
+            </div>
+            <div class="card-body">
+                <p>Keep your devices secure by:</p>
+                <ul>
+                    <li>Enabling a screen lock.</li>
+                    <li>Keeping your operating system and apps up to date.</li>
+                    <li>Using antivirus software to protect against malware.</li>
+                </ul>
+            </div>
+        </div>
         <section>
             <div class="container p-5">
                 <div class="my-4 text-center">
@@ -86,14 +104,5 @@
             </div>
 
         </section>
-        <section>
-            <div class="p-5" style="background-color:#233254">
-                <div class="text-center text-white">
-                    <h3>Ready to Secure your Digital Life</h3>
-                    <p class="my-5">Join thousand of user who trust SecureVault with their passwords</p>
-                    <a href="" class="btn btn-light mb-3">Get Started Now</a>
-                </div>
-            </div>
-        </section>
-    </main>
+    </div>
 @endsection

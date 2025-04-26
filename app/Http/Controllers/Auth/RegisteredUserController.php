@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Activity;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
@@ -44,7 +45,11 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
 
         Auth::login($user);
-
+        Activity::create([
+            'user_id' => auth()->id(),
+            'action' => 'password_reset',
+            'description' => 'User reset their password.'
+        ]);
         return redirect(route('dashboard', absolute: false));
     }
 }
