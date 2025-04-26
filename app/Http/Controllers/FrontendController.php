@@ -44,7 +44,12 @@ class FrontendController extends Controller
         // Only count passwords used more than once
         $reusedPasswords = array_filter($passwordMap, fn($count) => $count > 1);
         $totalReusedPasswords = count($reusedPasswords);
-        $activities = Activity::with('user')->latest()->take(20)->get();
+        $activities = Activity::with('user')
+            ->where('user_id', $userId)
+            ->latest()
+            ->take(20)
+            ->get();
+
         return view('admin.index', compact(
             'totalPassword',
             'totalSharedPassword',

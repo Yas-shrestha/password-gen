@@ -49,7 +49,7 @@
                 <!-- Password Length Slider -->
                 <div class="mt-3">
                     <label for="lengthSlider" class="form-label">Password Length: <span id="lengthValue">12</span></label>
-                    <input id="lengthSlider" type="range" min="6" max="20" value="12" class="form-range">
+                    <input id="lengthSlider" type="range" min="8" max="20" value="12" class="form-range">
                 </div>
 
                 <div class="text-center mt-3">

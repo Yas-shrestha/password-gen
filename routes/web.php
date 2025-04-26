@@ -41,8 +41,8 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     //     return view('admin.index');
     // })->name('dashboard');
     Route::get('/', [FrontendController::class, 'dashboard'])->name('dashboard');
-    Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
 });
+Route::post('/contact', [FrontendController::class, 'contactStore'])->name('contact.store');
 
 
 require __DIR__ . '/auth.php';

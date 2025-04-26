@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{{ asset('asset/images/secure.jpg') }}" type="image/x-icon">
+
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-secondary-subtle">
         <div class="container">
-            <a class="navbar-brand" href="/">Shield Pass</a>
+            <a class="navbar-brand" href="/"><i class="fa-solid fa-shield-halved"></i>Shield Pass</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -130,8 +132,8 @@
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide text-white" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="{{ asset('asset/images/secure.jpg') }}" class="rounded me-2" alt="Logo" width="20"
-                    height="20">
+                <img src="{{ asset('asset/images/secure.jpg') }}" class="rounded me-2" alt="Logo"
+                    width="20" height="20">
                 <strong class="me-auto" id="toastTitle">Notification</strong>
                 <small id="toastTime">Just now</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>

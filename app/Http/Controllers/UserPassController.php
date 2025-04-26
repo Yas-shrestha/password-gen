@@ -40,7 +40,10 @@ class UserPassController extends Controller
         $request->validate([
             'website' => 'required',
             'username' => 'required',
-            'password' => 'required',
+            'password' => [
+                'required',
+                'min:8',
+            ],
         ]);
         $pass = new UserPass();
         $pass->app_name = $request->website;
@@ -83,9 +86,12 @@ class UserPassController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'website' => 'required|min:25',
+            'website' => 'required',
             'username' => 'required',
-            'password' => 'nullable',
+            'password' => [
+                'required',
+                'min:8',
+            ],
         ]);
         $pass = new UserPass;
         $pass = $pass->where('id', $id)->first();

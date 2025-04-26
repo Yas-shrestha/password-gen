@@ -9,8 +9,9 @@
         <!-- Form for Adding a New Password -->
         <div class="card p-4 mb-4">
             <h2 class="text-2xl font-semibold mb-4">Add New Password</h2>
-            <form action="{{ route('pass-manage.store') }}" method="POST">
+            <form action="{{ route('pass-manage.update', $pass->id) }}" method="POST">
                 @csrf
+                @method('PUT')
                 <div class="mb-3">
                     <label for="website" class="form-label">Website</label>
                     <input type="text" name="website" id="website" class="form-control" placeholder="Enter website URL"

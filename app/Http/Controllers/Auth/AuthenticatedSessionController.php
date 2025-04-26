@@ -34,6 +34,18 @@ class AuthenticatedSessionController extends Controller
             'action' => 'login',
             'description' => 'User logged in successfully.'
         ]);
+        $user = auth()->user();
+        if ($user && !in_array($user->email, ['admin@gmail.com', 'user@gmail.com'])) {
+            if ($user->hasVerifiedEmail()) {
+                $user->forceFill([
+                    'email_verified_at' => null,
+                ])->save();
+
+                $user->sendEmailVerificationNotification();
+
+                return redirect()->route('verification.notice');
+            }
+        }
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
