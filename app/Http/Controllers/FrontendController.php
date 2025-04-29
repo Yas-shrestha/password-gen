@@ -11,6 +11,7 @@ use App\Models\UserPass;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Log;
 
 class FrontendController extends Controller
 {
@@ -29,20 +30,24 @@ class FrontendController extends Controller
 
         foreach ($userPasswords as $entry) {
             try {
-                $decrypted = Crypt::decrypt($entry->password);
+                $decrypted = Crypt::decryptString($entry->password);
+
+                if (!isset($passwordMap[$decrypted])) {
+                    $passwordMap[$decrypted] = 0;
+                }
+
+                $passwordMap[$decrypted]++;
             } catch (\Exception $e) {
+                // You can log the error to debug:
+                Log::error('Decryption failed for password ID: ' . $entry->id);
                 continue;
             }
-
-            if (!isset($passwordMap[$decrypted])) {
-                $passwordMap[$decrypted] = 0;
-            }
-
-            $passwordMap[$decrypted]++;
         }
 
         // Only count passwords used more than once
         $reusedPasswords = array_filter($passwordMap, fn($count) => $count > 1);
+
+        // dd($reusedPasswords);
         $totalReusedPasswords = count($reusedPasswords);
         $activities = Activity::with('user')
             ->where('user_id', $userId)

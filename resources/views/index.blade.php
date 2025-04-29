@@ -14,7 +14,6 @@
                         </div>
                         <div class="d-flex justify-content-center justify-content-md-start">
                             <a href="{{ route('register') }}" class="btn btn-primary me-3">Get Started</a>
-                            <a href="#" class="btn text-light"><i class="fa-solid fa-play"></i> Watch Video</a>
                         </div>
                     </div>
                     <div class="col-md-6  col-sm-12">

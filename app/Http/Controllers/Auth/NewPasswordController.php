@@ -48,14 +48,15 @@ class NewPasswordController extends Controller
                     'remember_token' => Str::random(60),
                 ])->save();
 
+                Activity::create([
+                    'user_id' =>  $user->id,
+                    'action' => 'password_reset',
+                    'description' => 'User reset their password.'
+                ]);
                 event(new PasswordReset($user));
             }
         );
-        Activity::create([
-            'user_id' => auth()->id(),
-            'action' => 'password_reset',
-            'description' => 'User reset their password.'
-        ]);
+
         // If the password was successfully reset, we will redirect the user back to
         // the application's home authenticated view. If there is an error we can
         // redirect them back to where they came from with their error message.

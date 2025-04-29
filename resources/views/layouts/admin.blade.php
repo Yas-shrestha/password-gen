@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
         integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="shortcut icon" href="{{ asset('asset/images/secure.jpg') }}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('asset/images/fav-icon.png') }}" type="image/x-icon">
 </head>
 
 <body>
@@ -55,7 +55,6 @@
                 </ul>
                 <div class="d-flex">
                     @if (Auth::user())
-                        <a href="{{ route('profile.edit') }}" class="btn btn-link text-decoration-none">Setting</a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit"
@@ -77,42 +76,28 @@
     </main>
     <footer class="mt-0 text-center text-lg-start" style="background-color:#111827">
         <div class="container p-4">
-            <div class="row">
+            <div class="row text-center">
                 <!-- Product -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase text-white">Product</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#" class="text-secondary text-decoration-none">Features</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Pricing</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Vault Access</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Mobile App</a></li>
-                    </ul>
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <img src="{{ asset('asset/images/fav-icon.png') }}" alt="">
                 </div>
 
                 <!-- Company -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Company</h5>
                     <ul class="list-unstyled">
-                        <li><a href="#" class="text-secondary text-decoration-none">About Us</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Careers</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Press</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Contact</a></li>
+                        <li><a href="{{ route('index') }}" class="text-secondary text-decoration-none">About Us</a>
+                        </li>
+                        <li><a href="{{ route('security') }}" class="text-secondary text-decoration-none">Security</a>
+                        </li>
+                        <li><a href="{{ route('support') }}" class="text-secondary text-decoration-none">Support</a>
+                        </li>
                     </ul>
                 </div>
 
-                <!-- Resource -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
-                    <h5 class="text-uppercase text-white">Resource</h5>
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#" class="text-secondary text-decoration-none">Help Center</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Security Guide</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">API Docs</a></li>
-                        <li><a href="#" class="text-secondary text-decoration-none">Blog</a></li>
-                    </ul>
-                </div>
 
                 <!-- Legal -->
-                <div class="col-lg-3 col-md-6 mb-4 mb-md-0">
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
                     <h5 class="text-uppercase text-white mb-0">Legal</h5>
                     <ul class="list-unstyled">
                         <li><a href="#" class="text-secondary text-decoration-none">Privacy Policy</a></li>
@@ -125,17 +110,16 @@
         </div>
 
         <div class="text-center p-3 text-white" style="background-color: rgba(0, 0, 0, 0.05);">
-            © 2020 Copyright:
+            © 2025 Copyright:
             <a class="text-secondary text-decoration-none" href="#">Shield Pass</a>
         </div>
     </footer>
 
-
     <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
         <div id="liveToast" class="toast hide text-white" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
-                <img src="{{ asset('asset/images/secure.jpg') }}" class="rounded me-2" alt="Logo"
-                    width="20" height="20">
+                <img src="{{ asset('asset/images/secure.jpg') }}" class="rounded me-2" alt="Logo" width="20"
+                    height="20">
                 <strong class="me-auto" id="toastTitle">Notification</strong>
                 <small id="toastTime">Just now</small>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
